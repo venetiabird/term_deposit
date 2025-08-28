@@ -17,10 +17,10 @@ class Calculator
   def final_balance
 
     interest_rate = rate / 100
-    payment_term = term.to_d / TWELVE_MONTHS
+    term_years = term.to_d / TWELVE_MONTHS
 
-    return simple_interest(interest_rate, payment_term) if payment_frequency == :maturity
-    compund_interest(interest_rate, payment_term)
+    return simple_interest(interest_rate, term_years) if payment_frequency == :maturity
+    compund_interest(interest_rate, term_years)
   end
 
   def calculate_projected_savings
@@ -29,8 +29,8 @@ class Calculator
 
   private 
 
-  def simple_interest(interest_rate, payment_term)
-    interest = (principal * interest_rate * (payment_term))
+  def simple_interest(interest_rate, term_years)
+    interest = (principal * interest_rate * (term_years))
     total_amount = principal + interest
 
     {
@@ -40,10 +40,10 @@ class Calculator
     }
   end
 
-  def compund_interest(interest_rate, payment_term)
+  def compund_interest(interest_rate, term_years)
     compound_period =  CalulatorConstants::FREQUENCY_MAP[payment_frequency]
     period_rate = interest_rate / compound_period
-    periods = compound_period * payment_term
+    periods = compound_period * term_years
     
     total_amount = principal * (1 + period_rate) ** ( periods )
 

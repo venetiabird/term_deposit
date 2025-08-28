@@ -9,8 +9,8 @@ class InputValidator
   MINIMUM_TERM = 3
 
   def self.validate_and_convert(raw)
-    amount = raw[:amount].to_d.round(2)
-    interest_rate = raw[:interest_rate].to_d.round(2)
+    amount = raw[:amount].to_d
+    interest_rate = raw[:interest_rate].to_d
     term = raw[:term].to_i if raw[:term]
     payment_frequency = raw[:payment_frequency].to_sym
     

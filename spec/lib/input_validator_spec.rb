@@ -19,7 +19,7 @@ RSpec.describe InputValidator do
 
       it 'returns the correct amount' do
         validated = subject.validate_and_convert(invalid_input)
-        expect(validated[:amount]).to eq 1000.15
+        expect(validated[:amount]).to eq 1000.154
       end
     end
 
