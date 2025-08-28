@@ -22,19 +22,20 @@ class Calculator
     compund_ineterest(interest_rate, payment_term)
   end
 
-  def calulcate_projected_savings
-    raise NotImplementedError, "calulcate_projected_savings not yet supported"
+  def calculate_projected_savings
+    raise NotImplementedError, "calculate_projected_savings not yet supported"
   end
 
   private 
 
   def simple_interest(interest_rate, payment_term)
-    interest = (principal * interest_rate * (payment_term)).round(2)
+    interest = (principal * interest_rate * (payment_term))
     total_amount = principal + interest
 
     {
-      final_amount: total_amount.to_f,
-      interest: interest.to_f,
+      final_amount: total_amount.to_f, 
+      interest: interest.round(2).to_f,
+      payout_frequency: payment_frequency.to_s
     }
   end
 
@@ -44,12 +45,11 @@ class Calculator
     periods = compound_period.to_d * payment_term
     
     total_amount = principal * (1 + period_rate) ** ( periods )
-    total_amount = total_amount.round(0)
-    interest = (total_amount - principal).round()
 
     {
-      final_amount: total_amount.to_f,
-      interest: interest.to_f,
+      final_amount: total_amount.round(2).to_f,
+      interest: (total_amount - principal).round(2).to_f,
+      payout_frequency: payment_frequency.to_s
     }
   end
 end

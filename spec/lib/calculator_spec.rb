@@ -1,40 +1,117 @@
 require 'calculator'
-
-
 RSpec.describe Calculator do
   let(:payment_frequency) { :maturity }
-  let(:inputs) { { amount: 10000, interest_rate: 1.1, term: 36, payment_frequency: payment_frequency } }
+  let(:term) { 36 }
+  let(:amount) { 10000 }
+  let(:interest) { 1.1 }
+  let(:inputs) { { amount: amount, interest_rate: interest, term: term, payment_frequency: payment_frequency } }
 
   subject { described_class.new(inputs) }
   describe '#final_balance' do
-    context 'when the interest paid at maturity' do
-      it 'returns a final amount for the term' do
-        expect(subject.final_balance[:final_amount]).to eq(10330)
-        expect(subject.final_balance[:interest]).to eq(330)
+
+  {
+    maturity: { final_amount: 10330, interest: 330 },
+    monthly:  { final_amount: 10335.35, interest: 335.35 },
+    quarterly:{ final_amount: 10335.04, interest: 335.04 },
+    annually: { final_amount: 10333.64, interest: 333.64 }
+  }.each do |freq, expected|
+    context "with #{freq} frequency" do
+      let(:payment_frequency) { freq }
+
+      it "calculates final amount and interest correctly" do
+        result = subject.final_balance
+
+        expect(result[:final_amount]).to eq(expected[:final_amount])
+        expect(result[:interest]).to eq(expected[:interest])
+        expect(result[:payout_frequency]).to eq(freq.to_s)
+      end
+    end
+  end
+
+    context 'edge cases at maturity' do
+
+      context 'with the minimum term' do
+        let(:term) { 3 }
+
+        it 'returns the calculated interest and final balance for the minimum term' do
+          expect(subject.final_balance[:final_amount]).to eq(10027.5)
+          expect(subject.final_balance[:interest]).to eq(27.5)
+          expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
+        end
+      end
+
+      context 'with the minimum initial amount' do
+        let(:amount) { 1000 }
+
+        it 'returns the calculated interest and final balance for the minimum initial amount' do
+          expect(subject.final_balance[:final_amount]).to eq(1033)
+          expect(subject.final_balance[:interest]).to eq(33)
+          expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
+        end
+      end
+
+      context 'with zero interest rate' do
+        let(:interest) { 0.0 }
+
+        it 'returns the calculated interest and final balance for zero interset' do
+          expect(subject.final_balance[:final_amount]).to eq(10000)
+          expect(subject.final_balance[:interest]).to eq(0)
+          expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
+        end
+      end
+
+      xcontext 'with fractional initial amount' do
+        let(:amount) { 1000.99 }
+
+        it 'returns the calculated interest and final balance for zero interset' do
+          expect(subject.final_balance[:final_amount]).to eq(1034.03)
+          expect(subject.final_balance[:interest]).to eq(33.03)
+          expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
+        end
       end
     end
 
-    context 'when the interest paid monthly' do
-      let(:payment_frequency) { :monthly}
-      it 'returns a final amount for the term' do
-        expect(subject.final_balance[:final_amount]).to eq(10335)
-        expect(subject.final_balance[:interest]).to eq(335)
-      end
-    end
+    context 'edge cases at quarterly' do
+      let(:payment_frequency) { :quarterly }
 
-    context 'when the interest paid quarterly' do
-      let(:payment_frequency) { :quarterly}
-      it 'returns a final amount for the term' do
-        expect(subject.final_balance[:final_amount]).to eq(10335)
-        expect(subject.final_balance[:interest]).to eq(335)
-      end
-    end
+      context 'with the minimum term' do
+        let(:term) { 3 }
 
-     context 'when the interst paid anually' do
-      let(:payment_frequency) { :annually}
-      it 'returns a final amount for the term' do
-        expect(subject.final_balance[:final_amount]).to eq(10334)
-        expect(subject.final_balance[:interest]).to eq(334)
+        it 'returns the calculated interest and final balance for the minimum term' do
+          expect(subject.final_balance[:final_amount]).to eq(10027.5)
+          expect(subject.final_balance[:interest]).to eq(27.5)
+          expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
+        end
+      end
+
+      context 'with the minimum initial amount' do
+        let(:amount) { 1000 }
+
+        it 'returns the calculated interest and final balance for the minimum initial amount' do
+          expect(subject.final_balance[:final_amount]).to eq(1033.50)
+          expect(subject.final_balance[:interest]).to eq(33.50)
+          expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
+        end
+      end
+
+      context 'with zero interest rate' do
+        let(:interest) { 0.0 }
+
+        it 'returns the calculated interest and final balance for zero interset' do
+          expect(subject.final_balance[:final_amount]).to eq(10000)
+          expect(subject.final_balance[:interest]).to eq(0)
+          expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
+        end
+      end
+
+      xcontext 'with fractional initial amount' do
+        let(:amount) { 1000.99 }
+
+        it 'returns the calculated interest and final balance for zero interset' do
+          expect(subject.final_balance[:final_amount]).to eq(1034.54)
+          expect(subject.final_balance[:interest]).to eq(34.54)
+          expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
+        end
       end
     end
   end
