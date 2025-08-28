@@ -60,4 +60,4 @@ RSpec.describe InputValidator do
       end
     end
   end
-end 
+end
