@@ -58,13 +58,21 @@ RSpec.describe Calculator do
         end
       end
 
-      xcontext 'with fractional initial amount' do
-        let(:amount) { 1000.99 }
+      [
+        { 
+          input: 1000.35, expected: "1033.00",
+          input: 1000.99, expected: "1034.03"
+        }
+      ].each do |data|
+        xcontext 'with fractional initial amount' do
+          let(:amount) { data[:input]}
 
-        it 'returns the calculated interest and final balance for zero interset' do
-          expect(subject.final_balance[:balance]).to eq(1034.03)
-          expect(subject.final_balance[:interest]).to eq(33.03)
-          expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
+          it 'returns the calculated interest and final balance for zero interset' do
+            # expect(subject.final_balance[:balance]).to eq(BigDecimal(data[:expected]))
+            expect(subject.final_balance[:balance].round(2).to_f).to eq(1033.00)
+            expect(subject.final_balance[:interest]).to eq(33.03)
+            expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
+          end
         end
       end
     end
@@ -106,7 +114,7 @@ RSpec.describe Calculator do
         let(:amount) { 1000.99 }
 
         it 'returns the calculated interest and final balance for zero interset' do
-          expect(subject.final_balance[:balance]).to eq(1034.54)
+          expect(subject.final_balance[:balance]).to eq(BigDecimal("1034.54"))
           expect(subject.final_balance[:interest]).to eq(34.54)
           expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
         end

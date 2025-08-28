@@ -19,8 +19,8 @@ class Calculator
     interest_rate = rate / 100
     payment_term = term.to_d / TWELVE_MONTHS
 
-    return simple_interest(interest_rate, payment_term) unless payment_frequency != :maturity 
-    compund_ineterest(interest_rate, payment_term)
+    return simple_interest(interest_rate, payment_term) if payment_frequency == :maturity
+    compund_interest(interest_rate, payment_term)
   end
 
   def calculate_projected_savings
@@ -40,7 +40,7 @@ class Calculator
     }
   end
 
-  def compund_ineterest(interest_rate, payment_term)
+  def compund_interest(interest_rate, payment_term)
     compound_period =  CalulatorConstants::FREQUENCY_MAP[payment_frequency]
     period_rate = interest_rate / compound_period
     periods = compound_period * payment_term

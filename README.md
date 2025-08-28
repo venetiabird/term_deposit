@@ -6,6 +6,10 @@ Its written in `Ruby`, using the `Thor` gem
 
 It takes as inputs a starting deposit amount, interest rate, investment term and interest paid.
 
+Interest calculation used
+- [Compound interest](https://www.calculatorsoup.com/calculators/financial/compound-interest-calculator.php)
+- [Simple interest](https://www.calculatorsoup.com/calculators/financial/simple-interest-plus-principal-calculator.php)
+
 ### Requirements
 
 - Ruby 3.x (or the version specified in `.ruby-version`)
@@ -85,7 +89,7 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 
 ### Things that are bugging me
 
-- ignored specs in calculator - the calculation is a bit off
+- ignored specs in calculator - the rounding is different
 - cli.rb is out in the root folder, preference would be to move into lib
 - does the projected savings method need to be implemented?
 
