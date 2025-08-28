@@ -1,0 +1,22 @@
+# Ignore bundler config
+/.bundle
+
+# Ignore Ruby version manager files
+/.ruby-version
+/.ruby-gemset
+
+# Ignore logs and temp files
+/log/*
+/tmp/*
+
+# Ignore compiled gems
+*.gem
+
+# Ignore Mac OS files
+.DS_Store
+
+# Ignore editor files
+*.swp
+*.swo
+.idea/
+.vscode/

@@ -1,0 +1,43 @@
+require_relative "boot"
+
+class Deposit < Thor
+  package_name "Deposit"
+
+  desc "final_payment", "Earned on a term deposit over a term at a specific rate"
+
+  option :help, type: :boolean, desc: "Show help"
+  option :amount, type: :numeric, required: false, desc: "Initial deposit amount"
+  option :rate, type: :numeric, required: false, default: 1.1, desc: "Interest rate (%)"
+  option :term, type: :numeric, required: false, default: 36, desc: "Term in months"
+  option :frequency, type: :string, required: false, default: "maturity", enum: ["monthly", "quarterly", "annually", "maturity"], desc: "Payment frequency (monthly, quarterly, annually, maturity)"
+  
+  def final_payment
+    if options[:help]
+      self.class.help(shell, "final_payment")
+      return
+    end
+
+    begin
+      enforce_required_options!
+
+      puts "Final Intererst Calculation: $Foo"
+    rescue StandardError => e
+      puts "❌ An error occurred: #{e.message}"
+      exit(1)
+    end
+  end
+
+  def self.exit_on_failure?
+    true
+  end
+
+  private 
+  
+  def enforce_required_options!
+    unless options[:amount]
+      puts "Error: --amount is required"
+      exit(1)
+    end
+  end
+end
+
