@@ -73,6 +73,23 @@ RSpec.describe Calculator do
           end
         end
       end
+
+            [
+        { 
+          input: 1400000.25, expected: "1446200.00"
+        }
+      ].each do |data|
+        context 'with very large initial amounts' do
+          let(:amount) { data[:input]}
+
+          it 'returns the calculated interest and final balance' do
+            result = subject.final_balance[:balance].to_f
+
+            expect(result).to be_within(0.3).of(BigDecimal(data[:expected]))
+            expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
+          end
+        end
+      end
     end
 
     context 'edge cases at quarterly' do
@@ -111,7 +128,7 @@ RSpec.describe Calculator do
       [
         { 
           input: 1000.35, expected: "1033.50",
-          input: 1000.99, expected: "1034.54"
+          input: 1000.99, expected: "1034.54",
         }
       ].each do |data|
         context 'with fractional initial amount' do
@@ -121,6 +138,23 @@ RSpec.describe Calculator do
             result = subject.final_balance[:balance].to_f
             # expect(subject.final_balance[:balance].ceil(2)).to eq(BigDecimal(data[:expected]))
             expect(result).to be_within(0.01).of(BigDecimal(data[:expected]))
+            expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
+          end
+        end
+      end
+
+      [
+        { 
+          input: 1400000.25, expected: "1446905.22"
+        }
+      ].each do |data|
+        context 'with very large initial amounts' do
+          let(:amount) { data[:input]}
+
+          it 'returns the calculated interest and final balance' do
+            result = subject.final_balance[:balance].to_f
+
+            expect(result).to be_within(0.3).of(BigDecimal(data[:expected]))
             expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
           end
         end
