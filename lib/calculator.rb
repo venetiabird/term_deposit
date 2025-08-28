@@ -34,7 +34,7 @@ class Calculator
     total_amount = principal + interest
 
     {
-      final_amount: total_amount.to_d, 
+      balance: total_amount.to_d, 
       interest: interest.round(2).to_d,
       payout_frequency: payment_frequency.to_s
     }
@@ -48,7 +48,7 @@ class Calculator
     total_amount = principal * (1 + period_rate) ** ( periods )
 
     {
-      final_amount: total_amount.round(2).to_d,
+      balance: total_amount.round(2).to_d,
       interest: (total_amount - principal).to_d.round(2),
       payout_frequency: payment_frequency.to_s
     }

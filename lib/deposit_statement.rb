@@ -1,6 +1,6 @@
 class DepositStatement
   def self.format_summary(result)
-    "Final balance: $#{format_currency(result[:final_amount])}, Interest earned: $#{format_currency(result[:interest])}, Paid at: #{result[:payout_frequency]}"
+    "Final balance: $#{format_currency(result[:balance])}, Interest earned: $#{format_currency(result[:interest])}, Paid at: #{result[:payout_frequency]}"
   end
 
   def self.format_currency(amount)
