@@ -1,5 +1,7 @@
 require_relative "boot"
 
+require_relative "lib/calculator"
+
 class Deposit < Thor
   package_name "Deposit"
 
@@ -20,7 +22,13 @@ class Deposit < Thor
     begin
       enforce_required_options!
 
-      puts "Final Intererst Calculation: $Foo"
+      saving_input = {
+        amount: options[:amount],
+        interest_rate: options[:rate],
+        term: options[:term],
+        payment_frequency: options[:frequency]
+      }
+      puts Calculator.new(saving_input).final_balance
     rescue StandardError => e
       puts "❌ An error occurred: #{e.message}"
       exit(1)
