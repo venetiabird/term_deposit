@@ -15,6 +15,7 @@ class Calculator
   end
   
   def final_balance
+
     interest_rate = rate / 100
     payment_term = term.to_d / TWELVE_MONTHS
 
@@ -33,22 +34,22 @@ class Calculator
     total_amount = principal + interest
 
     {
-      final_amount: total_amount.to_f, 
-      interest: interest.round(2).to_f,
+      final_amount: total_amount.to_d, 
+      interest: interest.round(2).to_d,
       payout_frequency: payment_frequency.to_s
     }
   end
 
   def compund_ineterest(interest_rate, payment_term)
     compound_period =  CalulatorConstants::FREQUENCY_MAP[payment_frequency]
-    period_rate = interest_rate / compound_period.to_d
-    periods = compound_period.to_d * payment_term
+    period_rate = interest_rate / compound_period
+    periods = compound_period * payment_term
     
     total_amount = principal * (1 + period_rate) ** ( periods )
 
     {
-      final_amount: total_amount.round(2).to_f,
-      interest: (total_amount - principal).round(2).to_f,
+      final_amount: total_amount.round(2).to_d,
+      interest: (total_amount - principal).to_d.round(2),
       payout_frequency: payment_frequency.to_s
     }
   end

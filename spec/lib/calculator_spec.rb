@@ -19,11 +19,9 @@ RSpec.describe Calculator do
       let(:payment_frequency) { freq }
 
       it "calculates final amount and interest correctly" do
-        result = subject.final_balance
-
-        expect(result[:final_amount]).to eq(expected[:final_amount])
-        expect(result[:interest]).to eq(expected[:interest])
-        expect(result[:payout_frequency]).to eq(freq.to_s)
+        expect(subject.final_balance[:final_amount]).to eq(expected[:final_amount])
+        expect(subject.final_balance[:interest]).to eq(expected[:interest])
+        expect(subject.final_balance[:payout_frequency]).to eq(freq.to_s)
       end
     end
   end
