@@ -6,7 +6,7 @@ require_relative "lib/deposit_statement"
 class Deposit < Thor
   package_name "Deposit"
 
-  desc "final_payment", "Earned on a term deposit over a term at a specific rate"
+  desc "calculate", "Earned on a term deposit over a term at a specific rate"
 
   option :help, type: :boolean, desc: "Show help"
   option :amount, type: :numeric, required: false, desc: "Initial deposit amount"
@@ -14,9 +14,9 @@ class Deposit < Thor
   option :term, type: :numeric, required: false, default: 36, desc: "Term in months"
   option :frequency, type: :string, required: false, default: "maturity", enum: ["monthly", "quarterly", "annually", "maturity"], desc: "Payment frequency (monthly, quarterly, annually, maturity)"
   
-  def final_payment
+  def calculate
     if options[:help]
-      self.class.help(shell, "final_payment")
+      self.class.help(shell, "calculate")
       return
     end
 

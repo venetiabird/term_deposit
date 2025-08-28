@@ -31,13 +31,13 @@ bundle exec rspec ./spec
 Calculate the interest with specific inputs
 
 ```bash
-thor deposit:final_payment --amount=10000 --rate=1.1 --term=36 --frequency=maturity
+thor deposit:calculate --amount=10000 --rate=1.1 --term=36 --frequency=maturity
 ```
 
 Calculate the interest for a specific starting amount using the program defaults
 
 ```bash
-thor deposit:final_payment --amount=10000
+thor deposit:calculate --amount=10000
 ```
 
 where the defaults are
@@ -66,13 +66,15 @@ thor deposit
 View help on commands
 
 ```bash
-thor deposit help final_payment
+thor deposit help calculate
 
 # or
 
-thor deposit:final_payment --help
+thor deposit:calculate --help
 ```
 
 ### License
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
+
+
