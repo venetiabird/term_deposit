@@ -6,10 +6,6 @@ Its written in `Ruby`, using the `Thor` gem
 
 It takes as inputs a starting deposit amount, interest rate, investment term and interest paid.
 
-### TODO:
-- add ruby version 
-
-
 ### Install dependencies and tests
 
 Install the dependencies 

@@ -1,22 +1,37 @@
-# Ignore bundler config
+# Bundler config
 /.bundle
+/vendor/bundle
 
-# Ignore Ruby version manager files
-/.ruby-version
-/.ruby-gemset
-
-# Ignore logs and temp files
-/log/*
-/tmp/*
-
-# Ignore compiled gems
+# Installed gems
 *.gem
 
-# Ignore Mac OS files
-.DS_Store
+# Logs and temp files
+/log/*
+/tmp/*
+/coverage/
+!/log/.keep
+!/tmp/.keep
 
-# Ignore editor files
+# Byebug / Pry history
+.byebug_history
+.pry_history
+
+# Rails-y or ActiveSupport projects might generate these
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Editor/IDE files
 *.swp
 *.swo
+*.swn
+*~
+.DS_Store
 .idea/
 .vscode/
+
+# OS files
+Thumbs.db
+
+# Test/CI artifacts
+/spec/examples.txt
+/.rspec_status
