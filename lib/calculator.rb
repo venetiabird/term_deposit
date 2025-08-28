@@ -11,7 +11,7 @@ class Calculator
     @principal = validated[:amount]
     @rate = validated[:interest_rate]
     @term = validated[:term]
-    @payment_frequency = validated[:payment_frequency].to_sym 
+    @payment_frequency = validated[:payment_frequency] 
   end
   
   def final_balance

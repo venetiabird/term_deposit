@@ -12,7 +12,7 @@ class InputValidator
     amount = raw[:amount].to_d.truncate(2)
     interest_rate = raw[:interest_rate].to_d.truncate(2)
     term = raw[:term].to_i if raw[:term]
-    payment_frequency = raw[:payment_frequency]
+    payment_frequency = raw[:payment_frequency].to_sym
     
     errors = []
     errors << "Starting deposit must be at least $1000" if amount < MINIMUM_DEPOSIT

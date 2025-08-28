@@ -1,6 +1,7 @@
 require_relative "boot"
 
 require_relative "lib/calculator"
+require_relative "lib/deposit_statement"
 
 class Deposit < Thor
   package_name "Deposit"
@@ -27,8 +28,8 @@ class Deposit < Thor
         interest_rate: options[:rate],
         term: options[:term],
         payment_frequency: options[:frequency]
-      }
-      puts Calculator.new(saving_input).final_balance
+      } 
+      puts DepositStatement.format_summary(Calculator.new(saving_input).final_balance)
     rescue StandardError => e
       puts "❌ An error occurred: #{e.message}"
       exit(1)
