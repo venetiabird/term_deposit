@@ -26,18 +26,24 @@ Run the tests
 bundle exec rspec ./spec
 ```
 
+Using guard to run tests while developing
+
+```bash
+bundle exec guard
+```
+
 ### Quick start
 
 Calculate the interest with specific inputs
 
 ```bash
-thor deposit:calculate --amount=10000 --rate=1.1 --term=36 --frequency=maturity
+bin/deposit calculate --amount=10000 --rate=1.1 --term=36 --frequency=maturity
 ```
 
 Calculate the interest for a specific starting amount using the program defaults
 
 ```bash
-thor deposit:calculate --amount=10000
+bin/deposit calculate --amount=10000
 ```
 
 where the defaults are
@@ -54,27 +60,32 @@ where the defaults are
 View the available commands
 
 ```bash
-thor list
+bin/deposit help
 ```
 
 Show the list of `deposit` related commands
 
 ```bash
-thor deposit
+bin/deposit help calculate
 ```
 
-View help on commands
+View help on `calculate` commands
 
 ```bash
-thor deposit help calculate
+bin/deposit help calculate
 
 # or
 
-thor deposit:calculate --help
+bin/deposit calculate --help
 ```
 
 ### License
 
 This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
 
+### Things that are bugging me
+
+- ignored specs in calculator - the calculation is a bit off
+- cli.rb is out in the root folder, preference would be to move into lib
+- does the projected savings method need to be implemented?
 
