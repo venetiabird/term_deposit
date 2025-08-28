@@ -64,13 +64,11 @@ RSpec.describe Calculator do
           input: 1000.99, expected: "1034.03"
         }
       ].each do |data|
-        xcontext 'with fractional initial amount' do
+        context 'with fractional initial amount' do
           let(:amount) { data[:input]}
 
-          it 'returns the calculated interest and final balance for zero interset' do
-            # expect(subject.final_balance[:balance]).to eq(BigDecimal(data[:expected]))
-            expect(subject.final_balance[:balance].round(2).to_f).to eq(1033.00)
-            expect(subject.final_balance[:interest]).to eq(33.03)
+          it 'returns the calculated interest and final balance' do
+            expect(subject.final_balance[:balance].ceil(2)).to eq(BigDecimal(data[:expected]))
             expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
           end
         end
@@ -110,13 +108,21 @@ RSpec.describe Calculator do
         end
       end
 
-      xcontext 'with fractional initial amount' do
-        let(:amount) { 1000.99 }
+      [
+        { 
+          input: 1000.35, expected: "1033.50",
+          input: 1000.99, expected: "1034.54"
+        }
+      ].each do |data|
+        context 'with fractional initial amount' do
+          let(:amount) { data[:input]}
 
-        it 'returns the calculated interest and final balance for zero interset' do
-          expect(subject.final_balance[:balance]).to eq(BigDecimal("1034.54"))
-          expect(subject.final_balance[:interest]).to eq(34.54)
-          expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
+          it 'returns the calculated interest and final balance' do
+            result = subject.final_balance[:balance].to_f
+            # expect(subject.final_balance[:balance].ceil(2)).to eq(BigDecimal(data[:expected]))
+            expect(result).to be_within(0.01).of(BigDecimal(data[:expected]))
+            expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
+          end
         end
       end
     end

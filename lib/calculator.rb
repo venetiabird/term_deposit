@@ -45,7 +45,7 @@ class Calculator
 
     {
       balance: total_amount.round(2).to_d,
-      interest: (total_amount - principal).to_d.round(2),
+      interest: (total_amount - principal).round(2).to_d,
       payout_frequency: payment_frequency.to_s
     }
   end
