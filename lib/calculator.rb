@@ -23,10 +23,6 @@ class Calculator
     compund_interest(interest_rate, term_years)
   end
 
-  def calculate_projected_savings
-    raise NotImplementedError, "calculate_projected_savings not yet supported"
-  end
-
   private 
 
   def simple_interest(interest_rate, term_years)
