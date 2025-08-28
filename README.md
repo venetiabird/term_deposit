@@ -6,7 +6,12 @@ Its written in `Ruby`, using the `Thor` gem
 
 It takes as inputs a starting deposit amount, interest rate, investment term and interest paid.
 
-### Install dependencies and tests
+### Requirements
+
+- Ruby 3.x (or the version specified in `.ruby-version`)
+- Bundler
+
+### Dependencies and tests
 
 Install the dependencies 
 
@@ -15,25 +20,13 @@ Install the dependencies
 bundle install
 ```
 
-Run all the tests
+Run the tests
 
 ```bash 
 bundle exec rspec ./spec
 ```
 
-### CLI Commands
-
-View the all commands available
-
-```bash
-thor list
-```
-
-View the `deposit` commands
-
-```bash
-thor desposit
-```
+### Quick start
 
 Calculate the interest with specific inputs
 
@@ -56,10 +49,30 @@ where the defaults are
 | Interest paid    | maturity      | Payment timing      |
 
 
-To get help on commands
+### CLI Commands
+
+View the available commands
+
+```bash
+thor list
+```
+
+Show the list of `deposit` related commands
+
+```bash
+thor deposit
+```
+
+View help on commands
 
 ```bash
 thor deposit help final_payment
+
+# or
+
+thor deposit:final_payment --help
 ```
 
+### License
 
+This project is licensed under the [MIT License](https://opensource.org/licenses/MIT).
