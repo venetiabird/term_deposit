@@ -93,8 +93,9 @@ RSpec.describe Calculator do
           let(:amount) { data[:input]}
 
           it 'returns the calculated interest and final balance' do
-            result = subject.final_balance[:balance].to_f
+            result = subject.final_balance[:balance].to_d
 
+            # assuming its ok to be within range ??
             expect(result).to be_within(0.3).of(BigDecimal(data[:expected]))
             expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
           end
@@ -155,8 +156,9 @@ RSpec.describe Calculator do
           let(:amount) { data[:input]}
 
           it 'returns the calculated interest and final balance' do
-            result = subject.final_balance[:balance].to_f
-            # expect(subject.final_balance[:balance].ceil(2)).to eq(BigDecimal(data[:expected]))
+            result = subject.final_balance[:balance].to_d
+            
+            # assuming its ok to be within range ??
             expect(result).to be_within(0.01).of(BigDecimal(data[:expected]))
             expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
           end
@@ -172,9 +174,10 @@ RSpec.describe Calculator do
           let(:amount) { data[:input]}
 
           it 'returns the calculated interest and final balance' do
-            result = subject.final_balance[:balance].to_f
+            result = subject.final_balance[:balance].to_d
 
-            expect(result).to be_within(0.3).of(BigDecimal(data[:expected]))
+            # assuming its ok to be within range ??
+            expect(result).to be_within(0.28).of(BigDecimal(data[:expected]))
             expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
           end
         end
