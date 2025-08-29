@@ -58,6 +58,16 @@ RSpec.describe Calculator do
         end
       end
 
+      context 'with large interest rate' do
+        let(:interest) { 15.0 }
+
+        it 'returns the calculated interest and final balance for zero interset' do
+          expect(subject.final_balance[:balance]).to eq(14500.00)
+          expect(subject.final_balance[:interest]).to eq(4500.00)
+          expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
+        end
+      end
+
       [
         { 
           input: 1000.35, expected: "1033.00",
@@ -121,6 +131,16 @@ RSpec.describe Calculator do
         it 'returns the calculated interest and final balance for zero interset' do
           expect(subject.final_balance[:balance]).to eq(10000)
           expect(subject.final_balance[:interest]).to eq(0)
+          expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
+        end
+      end
+
+      context 'with large interest rate' do
+        let(:interest) { 15.0 }
+
+        it 'returns the calculated interest and final balance for zero interset' do
+          expect(subject.final_balance[:balance]).to eq(15554.54)
+          expect(subject.final_balance[:interest]).to eq(5554.54)
           expect(subject.final_balance[:payout_frequency]).to eq(payment_frequency.to_s)
         end
       end

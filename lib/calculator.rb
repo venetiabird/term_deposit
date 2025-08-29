@@ -15,7 +15,6 @@ class Calculator
   end
   
   def final_balance
-
     interest_rate = rate / 100
     term_years = term.to_d / TWELVE_MONTHS
 
@@ -30,7 +29,7 @@ class Calculator
     total_amount = principal + interest
 
     {
-      balance: total_amount.to_d, 
+      balance: total_amount.to_d, # total_amount.round(2).to_d
       interest: interest.round(2).to_d,
       payout_frequency: payment_frequency.to_s
     }
