@@ -89,7 +89,7 @@ This project is licensed under the [MIT License](https://opensource.org/licenses
 
 ### Things that are bugging me
 
-- calculator spec with fractional initial value for compound calculation I think has a rounding issue. Would have liked to add more specs in this area. Specifically large initial amounts and acceptable errors. Other boundary/edge case specs I suspect are missing too.
+- calculator spec with fractional initial value for compound calculation I think has a rounding issue. Would have liked to add more specs in this area. Specifically large initial amounts and acceptable errors. Other boundary/edge case specs I suspect are missing too. On refelction the rounding rules could be encapsulated in their own class which would allow for easier and more tests. And if the rounding rules needed changing, then it would be in a single spot.
 - cli.rb is out in the root folder, preference would be to move into lib
 - does the projected savings method need to be implemented?
 
