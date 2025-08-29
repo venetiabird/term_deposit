@@ -19,7 +19,7 @@ class Calculator
     term_years = term.to_d / TWELVE_MONTHS
 
     return simple_interest(interest_rate, term_years) if payment_frequency == :maturity
-    compund_interest(interest_rate, term_years)
+    compound_interest(interest_rate, term_years)
   end
 
   private 
@@ -35,7 +35,7 @@ class Calculator
     }
   end
 
-  def compund_interest(interest_rate, term_years)
+  def compound_interest(interest_rate, term_years)
     compound_period =  CalulatorConstants::FREQUENCY_MAP[payment_frequency]
     period_rate = interest_rate / compound_period
     periods = compound_period * term_years
